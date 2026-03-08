@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云滇非遗荟 - 非遗文化与乡村振兴融合发展平台</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        /* 导航栏 */
+        nav {
+            background-color: #2c5234;
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+        
+        /* 英雄区 */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1593591882171-059122d89990?q=80&w=1935&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 5%;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #2c5234;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #1e3a24;
+        }
+        
+        /* 内容板块 */
+        .section {
+            padding: 4rem 5%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #2c5234;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #ffd700;
+            margin: 1rem auto;
+        }
+        
+        /* 项目背景板块 */
+        .background-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            color: #2c5234;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            color: #2c5234;
+            margin-bottom: 1rem;
+        }
+        
+        /* 数据展示板块 */
+        .data-section {
+            background-color: #f0f5f0;
+        }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .data-item {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .data-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c5234;
+            margin-bottom: 0.5rem;
+        }
+        
+        .data-label {
+            color: #666;
+        }
+        
+        /* 痛点与解决方案 */
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .problem, .solution {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .problem h3, .solution h3 {
+            color: #2c5234;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .problem ul, .solution ul {
+            list-style: none;
+        }
+        
+        .problem li, .solution li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .problem li::before {
+            content: '✘';
+            color: #dc3545;
+            position: absolute;
+            left: 0;
+        }
+        
+        .solution li::before {
+            content: '✔';
+            color: #28a745;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #2c5234;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: #ffd700;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin: 0 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">云滇非遗荟</div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#background">项目背景</a></li>
+                <li><a href="#data">数据洞察</a></li>
+                <li><a href="#pain-points">痛点与方案</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 英雄区 -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>云滇非遗荟</h1>
+            <p>聚焦云南少数民族非遗文化，打造线上交易 + 线下研学一体化融合平台，破解云南非遗产业发展痛点，推动非遗文化活态传承与产业化发展，助力云南民族地区经济增收。</p>
+            <a href="#background" class="btn">了解更多</a>
+        </div>
+    </section>
+
+    <!-- 项目背景 -->
+    <section id="background" class="section">
+        <div class="container">
+            <h2 class="section-title">项目背景</h2>
+            <div class="background-grid">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>政策支持</h3>
+                    <p>国家高度重视非物质文化遗产保护与乡村振兴战略融合发展，先后出台《中华人民共和国非物质文化遗产法》《关于进一步加强非物质文化遗产保护工作的意见》等政策，提出 "推动非物质文化遗产与旅游、文创、教育等产业深度融合，实现活态传承"。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>云南非遗优势</h3>
+                    <p>云南省作为我国少数民族最多、非遗资源最丰富的省份，拥有彝族、白族、傣族等 25 个少数民族的百余种非遗项目，2024 年云南省非遗产业收入达 29.75 亿元，同比增长 20%，非遗产业已成为云南乡村振兴的重要抓手。</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>市场需求增长</h3>
+                    <p>随着居民消费结构升级，文化消费成为扩大内需的新引擎，西南地区超 30% 的游客愿意参与非遗体验活动，非遗研学、非遗产品消费市场需求呈现爆发式增长。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据洞察 -->
+    <section id="data" class="section data-section">
+        <div class="container">
+            <h2 class="section-title">核心数据洞察</h2>
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">29.75亿</div>
+                    <div class="data-label">2024年云南非遗产业收入</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">20%</div>
+                    <div class="data-label">非遗产业收入同比增长</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">30%+</div>
+                    <div class="data-label">西南游客愿意参与非遗体验</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">5%</div>
+                    <div class="data-label">云南游客购买非遗产品比例</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">12%</div>
+                    <div class="data-label">全国游客购买非遗产品平均水平</div>
+                </div>
+                <div class="data-item">
+                    <div class="data-number">3000万+</div>
+                    <div class="data-label">云南年接待游客人次</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 痛点与解决方案 -->
+    <section id="pain-points" class="section">
+        <div class="container">
+            <h2 class="section-title">发展痛点与解决方案</h2>
+            <div class="problem-solution">
+                <div class="problem">
+                    <h3>云南非遗产业发展痛点</h3>
+                    <ul>
+                        <li>非遗传承人多分布在偏远民族村寨，产品销售渠道狭窄，"有好产品无好销路" 问题突出</li>
+                        <li>云南每年超 3000 万人次游客中，购买非遗产品的比例仅为 5%，远低于全国 12% 的平均水平</li>
+                        <li>非遗文化传播形式单一，线上数字化平台缺失</li>
+                        <li>线下非遗研学课程缺乏标准化、专业化设计，配套服务不完善</li>
+                    </ul>
+                </div>
+                <div class="solution">
+                    <h3>云滇非遗荟解决方案</h3>
+                    <ul>
+                        <li>打造线上交易平台，拓宽非遗产品销售渠道，解决"有好产品无好销路"问题</li>
+                        <li>构建非遗文化数字化传播矩阵，丰富传播形式，提升品牌影响力</li>
+                        <li>开发标准化、专业化的线下非遗研学课程体系，完善配套服务</li>
+                        <li>实现线上交易+线下研学一体化融合，提升游客购买转化率</li>
+                        <li>助力非遗传承人增收，推动非遗活态传承与乡村振兴融合发展</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="section data-section">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+                <p style="margin-bottom: 2rem; font-size: 1.1rem;">如果您对"云滇非遗荟"项目感兴趣，欢迎联系我们！</p>
+                <button class="btn" style="background-color: #ffd700; color: #2c5234;">
+                    <i class="fas fa-envelope"></i> 立即咨询
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <h3>云滇非遗荟</h3>
+            <p>推动非遗文化活态传承与产业化发展，助力云南民族地区经济增收</p>
+            <ul class="footer-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#background">项目背景</a></li>
+                <li><a href="#data">数据洞察</a></li>
+                <li><a href="#pain-points">痛点与方案</a></li>
+            </ul>
+            <p style="margin-top: 2rem; font-size: 0.9rem; color: #ccc;">© 2025 云滇非遗荟 版权所有</p>
+        </div>
+    </footer>
+
+    <script>
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.backgroundColor = '#1e3a24';
+            } else {
+                nav.style.backgroundColor = '#2c5234';
+            }
+        });
+    </script>
+</body>
+</html>
